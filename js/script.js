@@ -19,7 +19,7 @@ function secondsToMinutesSeconds(seconds) {
 
 async function getSongs(folder) {
     currFolder = folder;
-    let a = await fetch(`/${folder}/`)
+    let a = await fetch(`https://vpsingh16.github.io/${folder}/`)
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -32,8 +32,6 @@ async function getSongs(folder) {
         }
     }
  
-
-
     // Show all the songs in the playlist
     let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
     songUL.innerHTML = ""
@@ -61,20 +59,18 @@ async function getSongs(folder) {
 }
 
 const playMusic = (track, pause = false) => {
-    currentSong.src = `/${currFolder}/` + track
+    currentSong.src = `https://vpsingh16.github.io/${currFolder}/` + track
     if (!pause) {
         currentSong.play()
         play.src = "img/pause.svg"
     }
     document.querySelector(".songinfo").innerHTML = decodeURI(track)
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
-
-
 }
 
 async function displayAlbums() {
     console.log("displaying albums")
-    let a = await fetch(`/songs/`)
+    let a = await fetch(`https://vpsingh16.github.io/songs/`)
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -86,7 +82,7 @@ async function displayAlbums() {
         if (e.href.includes("/songs") && !e.href.includes(".htaccess")) {
             let folder = e.href.split("/").slice(-2)[0]
             // Get the metadata of the folder
-            let a = await fetch(`/songs/${folder}/info.json`)
+            let a = await fetch(`https://vpsingh16.github.io/songs/${folder}/info.json`)
             let response = await a.json(); 
             cardContainer.innerHTML = cardContainer.innerHTML + ` <div data-folder="${folder}" class="card">
             <div class="play">
@@ -97,7 +93,7 @@ async function displayAlbums() {
                 </svg>
             </div>
 
-            <img src="/songs/${folder}/cover.jpg" alt="">
+            <img src="https://vpsingh16.github.io/songs/${folder}/cover.jpg" alt="">
             <h2>${response.title}</h2>
             <p>${response.description}</p>
         </div>`
@@ -110,7 +106,6 @@ async function displayAlbums() {
             console.log("Fetching Songs")
             songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)  
             playMusic(songs[0])
-
         })
     })
 }
@@ -122,7 +117,6 @@ async function main() {
 
     // Display all the albums on the page
     await displayAlbums()
-
 
     // Attach an event listener to play, next and previous
     play.addEventListener("click", () => {
@@ -201,13 +195,7 @@ async function main() {
             currentSong.volume = .10;
             document.querySelector(".range").getElementsByTagName("input")[0].value = 10;
         }
-
     })
-
-
-
-
-
 }
 
-main() 
+main()
