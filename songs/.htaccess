@@ -1,9 +1,2 @@
 Options +Indexes
-<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|zip|tar.gz|tgz|bz2|tar.bz2|php|py|pl)$">
-    Order Allow,Deny
-    Deny from all
-</FilesMatch>
-<Files .htaccess>
-    Order Allow,Deny
-    Deny from all
-</Files>
+IndexOptions FancyIndexing NameWidth=* DescriptionWidth=*
