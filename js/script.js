@@ -104,7 +104,7 @@ async function displayAlbums() {
 }
 
 async function main() {
-    await getSongs("songs/Arijit Singh")
+    await getSongs("songs/Arijit%20Singh")
     playMusic(songs[0], true)
     await displayAlbums()
 
